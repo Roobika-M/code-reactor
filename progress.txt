@@ -1,2 +1,2 @@
 day 1:
-initialize, set up the structure
+initialize, set up the structure, connected frontend and backend using axios and created algorithm :|
