@@ -1,56 +1,30 @@
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
 function Visualizer() {
 
-  const [array, setArray] = useState([5, 2, 8, 1]);
+  const location = useLocation();
+  const algorithm = location.state;
+
+  const [array, setArray] = useState([5,2,8,1]);
   const [step, setStep] = useState(0);
-  const [running, setRunning] = useState(false);
 
 
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  function nextStep(){
 
-
-  async function startSort() {
-
-    setRunning(true);
-
-    let arr = [...array];
-
-    for(let i = 0; i < arr.length; i++) {
-
-      for(let j = 0; j < arr.length - i - 1; j++) {
-
-        setStep(
-          `Comparing ${arr[j]} and ${arr[j+1]}`
-        );
-
-        await sleep(1000);
-
-
-        if(arr[j] > arr[j+1]) {
-
-          setStep(
-            `Swapping ${arr[j]} and ${arr[j+1]}`
-          );
-
-
-          let temp = arr[j];
-          arr[j] = arr[j+1];
-          arr[j+1] = temp;
-
-
-          setArray([...arr]);
-
-          await sleep(1000);
-        }
-      }
+    if(step === 0){
+      setArray([2,5,8,1]);
+      setStep(1);
+    }
+    else if(step === 1){
+      setArray([2,5,1,8]);
+      setStep(2);
+    }
+    else if(step === 2){
+      setArray([2,1,5,8]);
+      setStep(3);
     }
 
-
-    setStep("Completed ⚡");
-    setRunning(false);
   }
 
 
@@ -58,42 +32,35 @@ function Visualizer() {
     <div>
 
       <h1>
-        ⚡ Bubble Sort Visualizer
+        ⚡ {algorithm.name}
       </h1>
+
+
+      <h3>
+        Time: {algorithm.timeComplexity}
+      </h3>
 
 
       <div className="array">
 
         {array.map((num,index)=>(
 
-          <span key={index}>
+          <div className="box" key={index}>
             {num}
-          </span>
+          </div>
 
         ))}
 
       </div>
 
 
-      <h3>
-        {step}
-      </h3>
-
-
-      <button
-        onClick={startSort}
-        disabled={running}
-      >
-        Start
+      <button onClick={nextStep}>
+        Next Step
       </button>
 
 
       <p>
-        Time Complexity: O(n²)
-      </p>
-
-      <p>
-        Space Complexity: O(1)
+        Step: {step}
       </p>
 
 

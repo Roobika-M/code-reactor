@@ -11,13 +11,11 @@ function Home() {
   const [algorithms, setAlgorithms] = useState([]);
 
   useEffect(() => {
-
     axios
       .get("http://localhost:8080/api/algorithms")
       .then(res => {
         setAlgorithms(res.data);
       });
-
   }, []);
 
 
@@ -29,12 +27,10 @@ function Home() {
       <div className="container">
 
         {algorithms.map((algo,index)=>(
-
           <AlgorithmCard
             key={index}
             algorithm={algo}
           />
-
         ))}
 
       </div>
@@ -45,27 +41,24 @@ function Home() {
 
 
 
-function App(){
+function App() {
 
-return (
+  return (
+    <BrowserRouter>
 
-<BrowserRouter>
+      <Routes>
 
-<Routes>
+        <Route path="/" element={<Home />} />
 
-<Route path="/" element={<Home/>}/>
+        <Route 
+          path="/visualizer" 
+          element={<Visualizer />}
+        />
 
-<Route 
-path="/visualizer/:name"
-element={<Visualizer/>}
-/>
+      </Routes>
 
-</Routes>
-
-</BrowserRouter>
-
-)
-
+    </BrowserRouter>
+  );
 }
 
 

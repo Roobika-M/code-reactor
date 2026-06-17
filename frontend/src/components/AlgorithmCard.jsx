@@ -1,13 +1,20 @@
 import { useNavigate } from "react-router-dom";
 
-function AlgorithmCard({ algorithm }) {
+
+function AlgorithmCard({algorithm}) {
 
   const navigate = useNavigate();
 
+
   return (
+
     <div
       className="card"
-      onClick={() => navigate(`/visualizer/${algorithm.name}`)}
+      onClick={() =>
+        navigate("/visualizer", {
+          state: algorithm
+        })
+      }
     >
 
       <h2>{algorithm.name}</h2>
@@ -25,7 +32,9 @@ function AlgorithmCard({ algorithm }) {
       </p>
 
     </div>
+
   );
 }
+
 
 export default AlgorithmCard;
