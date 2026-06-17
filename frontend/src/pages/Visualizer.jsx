@@ -1,71 +1,72 @@
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-
-function Visualizer() {
-
-  const location = useLocation();
-  const algorithm = location.state;
-
-  const [array, setArray] = useState([5,2,8,1]);
-  const [step, setStep] = useState(0);
+import bubbleSort from "../algorithms/bubbleSort";
 
 
-  function nextStep(){
+function Visualizer(){
 
-    if(step === 0){
-      setArray([2,5,8,1]);
-      setStep(1);
-    }
-    else if(step === 1){
-      setArray([2,5,1,8]);
-      setStep(2);
-    }
-    else if(step === 2){
-      setArray([2,1,5,8]);
-      setStep(3);
-    }
+const location = useLocation();
 
-  }
+const algorithm = location.state;
 
 
-  return (
-    <div>
-
-      <h1>
-        ⚡ {algorithm.name}
-      </h1>
+const [steps] = useState(
+  bubbleSort([5,2,8,1])
+);
 
 
-      <h3>
-        Time: {algorithm.timeComplexity}
-      </h3>
+const [current,setCurrent] = useState(0);
 
 
-      <div className="array">
 
-        {array.map((num,index)=>(
+return (
 
-          <div className="box" key={index}>
-            {num}
-          </div>
-
-        ))}
-
-      </div>
+<div>
 
 
-      <button onClick={nextStep}>
-        Next Step
-      </button>
+<h1>
+⚡ {algorithm.name}
+</h1>
 
 
-      <p>
-        Step: {step}
-      </p>
+<div className="array">
 
 
-    </div>
-  );
+{
+steps[current].map((num,index)=>(
+
+<div className="box" key={index}>
+{num}
+</div>
+
+))
+}
+
+
+</div>
+
+
+<button
+onClick={()=>{
+
+if(current < steps.length-1)
+setCurrent(current+1);
+
+}}
+>
+Next
+</button>
+
+
+<p>
+Step {current+1}/{steps.length}
+</p>
+
+
+</div>
+
+)
+
 }
 
 
