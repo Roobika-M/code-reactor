@@ -28,3 +28,23 @@ h1{
     width:250px;
 
 }
+
+.array {
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  margin:30px;
+}
+
+.array span {
+  background:#333;
+  padding:20px;
+  border-radius:10px;
+  font-size:25px;
+}
+
+
+button {
+  padding:10px 20px;
+  cursor:pointer;
+}
