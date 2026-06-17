@@ -56,7 +56,7 @@ return (
 <Route path="/" element={<Home/>}/>
 
 <Route 
-path="/visualizer"
+path="/visualizer/:name"
 element={<Visualizer/>}
 />
 

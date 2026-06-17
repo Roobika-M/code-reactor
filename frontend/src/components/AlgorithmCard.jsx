@@ -1,20 +1,31 @@
-function AlgorithmCard({algorithm}) {
+import { useNavigate } from "react-router-dom";
 
-    return (
-        <div className="card">
-            <h2>
-                {algorithm.name}
-            </h2>
-            <p>
-                Category: {algorithm.category}
-            </p>
-            <p>
-                Time: {algorithm.timeComplexity}
-            </p>
-            <p>
-                Space: {algorithm.spaceComplexity}
-            </p>
-        </div>
-    );
+function AlgorithmCard({ algorithm }) {
+
+  const navigate = useNavigate();
+
+  return (
+    <div
+      className="card"
+      onClick={() => navigate(`/visualizer/${algorithm.name}`)}
+    >
+
+      <h2>{algorithm.name}</h2>
+
+      <p>
+        Category: {algorithm.category}
+      </p>
+
+      <p>
+        Time: {algorithm.timeComplexity}
+      </p>
+
+      <p>
+        Space: {algorithm.spaceComplexity}
+      </p>
+
+    </div>
+  );
 }
+
 export default AlgorithmCard;
